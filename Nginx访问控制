@@ -1,0 +1,28 @@
+
+一、http_access_module
+location / {
+    root /path/to/html;  //设置html文件的根目录
+    index index.html index.htm; //默认首页
+}
+
+//下面一个location表示对上面HTML根目录文件夹下的admin.html的访问权限的设置
+// 可以设置网站管理后台的访问权限（后台只允许指定IP访问: allow 指定IP, deny all;）
+location ~ ^/admin.html {
+    root /path/to/html;
+    deny deny_ip; //限制哪些IP不能访问, IP段的格式为 222.198.128.0/24
+    allow allow_ip; //允许哪些IP可以访问,值可以为all;
+    index index.html index.htm;
+}
+
+
+http_access_module采用remote_address识别ip，所以如果用户通过代理访问，这个值就是代理的ip
+
+http_x_forwarded_for则不一样，它会带上所有的ip信息
+
+http_x_forwarded_for = Client ip, Proxy1 ip, Proxy2 ip....
+
+
+解决http_access_module局限性的办法
+1、采用别的HTTP头信息控制访问，如http_x_forwared_for;
+2、结合geo模块
+3、通过HTTP自定义变量传递
