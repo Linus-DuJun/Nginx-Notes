@@ -1,0 +1,9 @@
+一、Nginx简述
+  Nginx是一个开源且高性能、可靠的HTTP中间件、代理服务
+二、常见的HTTP服务
+  HTTPD － Apache基金会
+  IIS － 微软
+  GWS － Google
+三、epoll模型
+  1、每当FD就绪，采用系统的回调函数直接将FD放入，效率更高
+  2、最大连接无限制

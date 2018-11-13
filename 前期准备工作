@@ -1,0 +1,19 @@
+一、四项确认
+1、确认系统网络
+  www.baidu.com
+2、确认yum可用
+  yum list|grep gcc
+3、确认关闭iptables规则
+  iptables -L  // 查看
+  iptables -F  //关闭
+  iptables -t nat -L //查看
+  iptables -t nat -F //关闭
+4、确认停用selinux
+  getenforce  //查看selinux状态
+  setenforce 0 //关闭selinux
+二、两项安装
+  yum -y install gcc gcc-c++ autoconf pcre pcre-devel make automake
+  yum -y install wget httpd-tools vim
+三、初始化
+  cd /opt;
+  mkdir app download logs work backup

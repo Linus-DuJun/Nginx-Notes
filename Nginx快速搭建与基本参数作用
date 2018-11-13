@@ -1,0 +1,13 @@
+一、安装
+  1、创建yum源
+  http://nginx.org/en/linux_packages.html#stable
+  2、查看yum源是否创建成功
+  yum list | grep nginx
+  3、 安装
+  yum install nginx
+  4、测试
+  nginx   // 查看nginx有哪些命令
+  nginx -v  //(查看nginx版本)
+  nginx -V  //查看nginx的配置选项
+  5、查看nginx安装了哪些目录
+  rpm -ql nginx
