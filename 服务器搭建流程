@@ -1,0 +1,53 @@
+一、Nginx下载安装
+  第一种方法：
+  refs: http://nginx.org/en/linux_packages.html
+  1、新建yum源
+    a: 在/etc/yum.repos.d/目录下新建nginx.repo文件
+    b: 文件内容
+      [nginx]
+      name=nginx repo
+      baseurl=http://nginx.org/packages/OS/OSRELEASE/$basearch/
+      gpgcheck=0
+      enabled=1
+      将OS替换成rehl或者centos(根据Linux系统发行版本);
+      将OSRELEASE替换成6或者7(根据系统的版本)
+  2、执行安装命令
+    sudo yum install nginx
+  第二种方法：
+  1、添加CentOS 7 EPEL repository
+      sudo yum install epel-release
+  2、安装Nginx
+      sudo yum install nginx
+二、运行Nginx
+    sudo systemctl status nginx //检查nginx状态
+    sudo systemctl start nginx  // start nginx
+    sudo systemctl enable nginx //让nginx开机自动运行
+
+三、安装node
+  refs:  https://github.com/nodesource/distributions/blob/master/README.md#rpminstall
+
+四、检测nginx运行状态
+    浏览器输入公网IP,如果出现默认的HTML页面则表示nginx运行正常
+    "
+    This is the default index.html page that is distributed with nginx on Fedora. It is located in /usr/share/nginx/html.
+
+    You should now put your content in a location of your choice and edit the root configuration directive in the nginx configuration file /etc/nginx/nginx.conf.
+    "
+五、代理配置
+
+server {
+listen 80;
+server_name your_domain.com;
+location / {
+    proxy_pass http://private_ip_address:8080;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+ }
+}
+
+1、将your_domain.com 替换成你自己的域名
+2、将private_ip_address替换成你的IP地址
+    
